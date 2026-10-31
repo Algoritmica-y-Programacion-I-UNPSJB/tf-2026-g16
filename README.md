@@ -1,8 +1,7 @@
 # Trabajo Integrador Final 2026 — Grupo 16
 
-**Juego propuesto:** Ahorcado  
+**Juego aprobado:** Ahorcado  
 **Interfaz / Modalidad:** Gráfica (SDL3) — 1 jugador vs PC  
-**Estado:** Propuesta presentada el 2026-10-30; pendiente de aprobación formal por la cátedra.
 
 ## Integrantes y aportes
 - Nicolás Gonzalo Ullua (GitHub no informado)
@@ -11,8 +10,6 @@
 - Lautaro Campos (GitHub no informado)
 
 ## Reglas y alcance
-Propuesta presentada por el grupo, pendiente de aprobación formal:
-
 El juego será de un jugador contra la computadora.
 
 Las palabras se seleccionarán aleatoriamente de un conjunto organizado por categorías, almacenadas en diferentes archivos.
