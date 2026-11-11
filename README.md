@@ -4,7 +4,7 @@
 **Interfaz / Modalidad:** Gráfica (SDL3) — 1 jugador vs PC  
 
 ## Integrantes y aportes
-- Nicolás Gonzalo Ullua (GitHub no informado)
+- Nicolás Gonzalo Ullua (@ulluanicolas052-maker)
 - Ignacio Nicolás Sanzone (@nachito125)
 - Alex Joshua Arines (GitHub no informado)
 - Lautaro Campos (GitHub no informado)
