@@ -1,0 +1,20 @@
+Futbol
+Basquet
+Cricket
+Tenis
+Atletismo
+Rugby
+Formula Uno
+Boxeo
+Hockey Sobre Hielo
+Voley
+Baseball
+Futbol Americano
+Artes Marciales Mixtas
+Badminton
+Ciclismo
+Natacion
+Gimnasia Artistica
+Gimnasio
+Lucha
+Ski
