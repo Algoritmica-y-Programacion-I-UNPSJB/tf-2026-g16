@@ -55,15 +55,7 @@ void pedir_nombre_jugador(Ranking *jugador) {
     jugador->puntaje_jugador = 0;
 }
 
-void mostrar_reglas(void) {
-    printf("=== REGLAS DEL JUEGO ===\n");
-    printf("- Tenes 6 errores permitidos como maximo.\n");
-    printf("- Ingresa una letra por turno.\n");
-    printf("- Letras repetidas o invalidas no restan intentos.\n");
-    printf("- Podes ingresar '0' durante la partida para salir.\n");
-}
-
-int elegir_categoria(void) {
+int elegir_categoria(char *palabra) {
     struct Categoria categorias[MAX_CATEGORIAS];
     int cant_cats = listar_categorias(categorias, MAX_CATEGORIAS);
     int opcion = 0;
@@ -78,5 +70,9 @@ int elegir_categoria(void) {
         getchar();
     } while (opcion < 1 || opcion > cant_cats);
 
-    return cargar_categoria(categorias[opcion - 1].nombre_archivo);
+    if (cargar_categoria(categorias[opcion - 1].nombre_archivo) == 1) {
+        return elegir_palabra(palabra);
+    }
+
+    return 0;
 }
