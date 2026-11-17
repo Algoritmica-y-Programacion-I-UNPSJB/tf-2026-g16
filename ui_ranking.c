@@ -9,7 +9,6 @@
 */
 #define NOMBRE_JUGADOR 30
 #define TOTAL_RANKING 5
-#define COMPARAR_RANKING 4
 
 /**
  * @brief la función leerá el archivo del ranking, y devolverá el total de las personas dentro del ranking.

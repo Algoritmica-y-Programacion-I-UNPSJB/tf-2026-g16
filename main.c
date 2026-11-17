@@ -3,6 +3,7 @@
 #include "ranking.h"
 #include "ui_inicio.h"
 #include "palabras.h"
+#include "partida.h"
 
 void menu();
 void proceso_de_juego();
@@ -28,8 +29,10 @@ int main(void)
         {
             case JUGAR:
                 system("clear");
-                proceso_de_juego();
-                printf("\npresiones ENTER para salir...\n");
+                char palabra[MAX_LONGITUD];
+                elegir_palabra(palabra);
+                partida(palabra);
+                printf("Presiona enter para volver al menú.\n");
                 esperar_enter();
                 break;
             case VER_PUNTAJE:
