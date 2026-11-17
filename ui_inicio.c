@@ -48,3 +48,35 @@ int mostrar_menu_inicio(char *nombre) {
     printf("\nERROR CRITICO: No se encontro el archivo '%s'.\n", categorias[indice].nombre_archivo);
     return 0; 
 }
+void pedir_nombre_jugador(Ranking *jugador) {
+    printf("Ingresa tu nombre: ");
+    scanf(" %29[^\n]", jugador->nombre_jugador);
+    getchar();
+    jugador->puntaje_jugador = 0;
+}
+
+void mostrar_reglas(void) {
+    printf("=== REGLAS DEL JUEGO ===\n");
+    printf("- Tenes 6 errores permitidos como maximo.\n");
+    printf("- Ingresa una letra por turno.\n");
+    printf("- Letras repetidas o invalidas no restan intentos.\n");
+    printf("- Podes ingresar '0' durante la partida para salir.\n");
+}
+
+int elegir_categoria(void) {
+    struct Categoria categorias[MAX_CATEGORIAS];
+    int cant_cats = listar_categorias(categorias, MAX_CATEGORIAS);
+    int opcion = 0;
+
+    for (int i = 0; i < cant_cats; i++) {
+        printf("%d. %s\n", i + 1, categorias[i].nombre_mostrar);
+    }
+
+    do {
+        printf("Elegi una categoria (1-%d): ", cant_cats);
+        scanf("%d", &opcion);
+        getchar();
+    } while (opcion < 1 || opcion > cant_cats);
+
+    return cargar_categoria(categorias[opcion - 1].nombre_archivo);
+}
