@@ -6,5 +6,5 @@
 int mostrar_menu_inicio(char *nombre);
 void pedir_nombre_jugador(Ranking *jugador);
 void mostrar_reglas(void);
-int elegir_categoria(void);
+int elegir_categoria(char *palabra);
 #endif
