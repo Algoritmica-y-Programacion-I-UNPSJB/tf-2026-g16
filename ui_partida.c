@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include "partida.h"
 #include "puntaje.h"
@@ -124,6 +125,7 @@ int partida(const char palabraSecreta[], Ranking *puntaje)
 
     while (errores < MAX_INTENTOS && !palabraCompleta(descubierta, longitud))
     {
+        system("clear");
         mostrarMuneco(errores);
         mostrarEstado(palabraSecreta, descubierta);
 
@@ -183,7 +185,7 @@ int partida(const char palabraSecreta[], Ranking *puntaje)
             printf("\nLa letra no esta en la palabra.\n");
         }
     }
-
+    system("clear");
     mostrarMuneco(errores);
     mostrarEstado(palabraSecreta, descubierta);
 

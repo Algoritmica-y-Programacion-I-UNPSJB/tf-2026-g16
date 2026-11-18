@@ -1,20 +1,14 @@
 #include  <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "ranking.h"
 #include "ui_inicio.h"
 #include "palabras.h"
 #include "partida.h"
 #include "puntaje.h"
+#include "dispatch_table.h"
 
-/** 
-* En un principio este archivo dispatch_table contiene toda la jugabilidad y las opciones que se
-    usaran en main.c
-* Mediante un puntero a función declarada a posteriori, 
-    lleva a cabo las decisiones que tomará el usuario
-*/
-
-typedef void(*decision_usuario)(int *decision);
 
 /*limpia los salto de línea*/
 void esperar_enter(void)
@@ -47,7 +41,7 @@ void jugar(Ranking *jugador)
         system("clear");
         elegir_categoria(palabra);
         system("clear");
-        partida(palabra, &jugador);
+        partida(palabra, jugador);
         esperar_enter();
     } 
     else if(jugar == 2)
@@ -55,7 +49,7 @@ void jugar(Ranking *jugador)
         elegir_categoria_azar(palabra);
         printf("Palabra recibida: '%s'\n", palabra);
         printf("Longitud: %zu\n", strlen(palabra));
-        partida(palabra, &jugador);
+        partida(palabra, jugador);
         esperar_enter();
     }
     else 
@@ -64,6 +58,15 @@ void jugar(Ranking *jugador)
         esperar_enter();
     }
 }
+
+void ver_puntaje(Ranking *jugador)
+{
+    (void)jugador;
+    system("clear");
+    mostrar_ranking();
+    esperar_enter();
+}
+
 
 void reglas(Ranking *jugador)
 {
@@ -76,14 +79,14 @@ void reglas(Ranking *jugador)
 
 void salir(Ranking *jugador)
 {
-    agregar_nuevo_puntaje(&jugador);
+    agregar_nuevo_puntaje(jugador);
     printf("Fin del programa...\n");
 }
 
-const decision_usuario TABLA_OPERACION[SALIR] =
+const decision_usuario TABLA_OPERACION[SALIR + 1] =
 {
     [JUGAR] = jugar,
-    [VER_PUNTAJE] = mostrar_ranking,
+    [VER_PUNTAJE] = ver_puntaje,
     [REGLAS] = reglas,
     [SALIR] = salir
 };

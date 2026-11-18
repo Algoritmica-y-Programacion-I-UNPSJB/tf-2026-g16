@@ -24,6 +24,5 @@ int agregar_nuevo_puntaje(Ranking *nuevo_registro);
 int guardar_ranking(Ranking *rank, int leidos, const char *filename);
 void mostrar_ranking();
 
-void salir();
 
 #endif
