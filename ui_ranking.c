@@ -32,7 +32,7 @@ int leer_ranking(Ranking *rank, const char *filename)
 }
 
 /**
-* @brief la función guardará el registro luego de ser comparado por otr afunción en el archivo ranking.dat
+* @brief la función guardará el registro luego de ser comparado por otra función en el archivo ranking.dat
 * @param rank Arreglo evaluado, comparado y ordenado.
 * @param filename Documento donde se guardará
 * @return En este caso devolveré la cantidad de escritos y leidos del archivo:
@@ -62,24 +62,17 @@ int guardar_ranking(Ranking *rank, int leidos, const char *filename)
  * @return El espacio nuevo que se regitró si estaba vacío, si no retorna la cantidad que ya estaba
  */
 
-int agregar_nuevo_puntaje(Ranking *rank, Ranking *nuevo_registro)
+int agregar_nuevo_puntaje(Ranking *nuevo_registro)
 {
+    Ranking rank[TOTAL_RANKING]; 
     int leidos = leer_ranking(rank, "ranking.dat");
     bool agregado = false;
-    int ultimo_indice;
 
     /**
-     * @param ultimo_indice recibe el valor de la cantidad de leídos.
+     * @param ultimo_indice recibe el valor de la última posición ocupada. 
+     * Si la cantidad fue ocupada por completo, último índice evaluará la última posición
      */
-
-    if(leidos == 0)
-    {
-        ultimo_indice = leidos;
-    }
-    else if(leidos < TOTAL_RANKING)
-    {
-        ultimo_indice = TOTAL_RANKING - 1;
-    }
+     int ultimo_indice = leidos < TOTAL_RANKING ? leidos : TOTAL_RANKING - 1;
 
     /**
      * Función que inserta un nuevo jugador y desplaza el menor puntaje que tiene.
@@ -89,7 +82,8 @@ int agregar_nuevo_puntaje(Ranking *rank, Ranking *nuevo_registro)
         if (nuevo_registro->puntaje_jugador > (rank + i)->puntaje_jugador && agregado == false)
         {
             /** 
-             * Crea una nueva estructura temporal que recibe el valor de
+            * Crea una nueva estructura temporal, donde analiza el archivo y de forma
+                decreciente, analiza puntaje por puntaje, desde el último puntaje de la lista
             */
             for(Ranking *registro = rank + ultimo_indice; registro > rank + i; registro--)
             {
@@ -103,6 +97,14 @@ int agregar_nuevo_puntaje(Ranking *rank, Ranking *nuevo_registro)
             }
         }
     }
+
+    if(!agregado && leidos < TOTAL_RANKING)
+    {
+        rank[leidos] = *nuevo_registro;
+        leidos++;
+        agregado = true;
+    }
+
     if (agregado == true)
     {
         return guardar_ranking(rank, leidos < TOTAL_RANKING ? leidos + 1 : leidos, "ranking.dat");

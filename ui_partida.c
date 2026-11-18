@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include <ctype.h>
 #include "partida.h"
+#include "puntaje.h"
+#include "ranking.h"
+#include "palabras.h"
 
-#define MAX_LETRAS 50
 #define MAX_INTENTOS 6
 
 /* Devuelve 1 si el caracter es una letra del alfabeto ingles. */
@@ -85,9 +88,9 @@ int palabraCompleta(const int descubierta[], int longitud)
 }
 
 /* Ejecuta una partida. Retorna 1 si gana, 0 si pierde y -1 si sale. */
-int partida(const char palabraSecreta[])
+int partida(const char palabraSecreta[], Ranking *puntaje)
 {
-    int descubierta[MAX_LETRAS] = {0};
+    int descubierta[MAX_LONGITUD] = {0};
     char letrasUsadas[27];
     int cantidadLetras = 0;
     int longitud;
@@ -104,7 +107,7 @@ int partida(const char palabraSecreta[])
 
     longitud = (int)strlen(palabraSecreta);
 
-    if (longitud == 0 || longitud >= MAX_LETRAS)
+    if (longitud == 0 || longitud >= MAX_LONGITUD)
     {
         printf("Error: la palabra secreta no es valida.\n");
         return -1;
@@ -187,6 +190,11 @@ int partida(const char palabraSecreta[])
     if (palabraCompleta(descubierta, longitud))
     {
         printf("\nFelicitaciones, ganaste la partida.\n");
+        bool gano = true;
+        int longitudPalabra;
+        longitudPalabra = (int)strlen(palabraSecreta);
+        puntaje->puntaje_jugador += calcular_puntaje(gano, errores, longitudPalabra);
+        mostrar_resumen(longitudPalabra, gano, errores);
         return 1;
     }
 

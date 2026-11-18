@@ -15,5 +15,6 @@ int listar_categorias(struct Categoria lista[], int max_cats);
 int cargar_categoria(const char *nombre_archivo);
 int cantidad_palabras();
 int elegir_palabra(char *destino);
+int elegir_categoria_azar(char *palabra);
 
 #endif

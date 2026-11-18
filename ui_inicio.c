@@ -48,6 +48,12 @@ int mostrar_menu_inicio(char *nombre) {
     printf("\nERROR CRITICO: No se encontro el archivo '%s'.\n", categorias[indice].nombre_archivo);
     return 0; 
 }
+void mostrar_reglas(){
+    printf("\n¡Hola! Reglas basicas del juego son:\n");
+    printf("- Tenes 6 errores permitidos como maximo.\n");
+    printf("- Ingresa una letra por turno.\n");
+    printf("- Letras repetidas o invalidas no restan intentos.\n");
+}
 void pedir_nombre_jugador(Ranking *jugador) {
     printf("Ingresa tu nombre: ");
     scanf(" %29[^\n]", jugador->nombre_jugador);

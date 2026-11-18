@@ -20,9 +20,10 @@ typedef struct
 } Ranking;
 
 int leer_ranking(Ranking *rank, const char *filename);
-int agregar_nuevo_puntaje(Ranking *rank, Ranking *nuevo_registro);
+int agregar_nuevo_puntaje(Ranking *nuevo_registro);
 int guardar_ranking(Ranking *rank, int leidos, const char *filename);
 void mostrar_ranking();
 
+void salir();
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef PARTIDA_H
 #define PARTIDA_H
 
+#include "ranking.h"
 /* Muestra el dibujo del ahorcado segun la cantidad de errores. */
 void mostrarMuneco(int errores);
 
@@ -11,6 +12,6 @@ void mostrarEstado(const char palabra[], const int descubierta[]);
 int palabraCompleta(const int descubierta[], int longitud);
 
 /* Ejecuta una partida: 1 si gana, 0 si pierde y -1 si el jugador sale. */
-int partida(const char palabraSecreta[]);
+int partida(const char palabraSecreta[], Ranking *puntaje);
 
 #endif

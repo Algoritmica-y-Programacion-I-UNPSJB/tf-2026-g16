@@ -1,26 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <time.h>
 #include "ranking.h"
 #include "ui_inicio.h"
 #include "palabras.h"
 #include "partida.h"
+#include "puntaje.h"
 
-void menu();
-void proceso_de_juego();
+void menu(Ranking *jugador);
 void esperar_enter();
 
 int main(void)
 {
+    Ranking jugador;
     int decision_jugador;
-    char nombre[NOMBRE_JUGADOR];
 
-    mostrar_menu_inicio(nombre);
+    pedir_nombre_jugador(&jugador);
     printf("========================================\n");
+    system("clear");
 
     do
     {
         
-        menu();
+        menu(&jugador);
 
         scanf("%d", &decision_jugador);
         getchar();
@@ -29,25 +33,48 @@ int main(void)
         {
             case JUGAR:
                 system("clear");
+                int jugar;
                 char palabra[MAX_LONGITUD];
-                elegir_palabra(palabra);
-                partida(palabra);
-                printf("Presiona enter para volver al menú.\n");
-                esperar_enter();
+                printf("Seleccione la opción que desea: \n");
+                printf("\n1. Elegir categoría.\n");
+                printf("2. Categoría al azar.\n");
+                scanf("%d", &jugar);
+                getchar();
+
+                if(jugar == 1)
+                {
+                    system("clear");
+                    elegir_categoria(palabra);
+                    system("clear");
+                    partida(palabra, &jugador);
+                    esperar_enter();
+                } 
+                else if(jugar == 2)
+                {
+                    elegir_categoria_azar(palabra);
+                    printf("Palabra recibida: '%s'\n", palabra);
+                    printf("Longitud: %zu\n", strlen(palabra));
+                    partida(palabra, &jugador);
+                    esperar_enter();
+                }
+                else 
+                {
+                    printf("Opción incorrecta!");
+                    esperar_enter();
+                }
                 break;
             case VER_PUNTAJE:
                 system("clear");
                 mostrar_ranking();
-                printf("\npresiones ENTER para salir...\n");
                 esperar_enter();
                 break;
             case REGLAS:
                 system("clear");
-                printf("proceso de muestra de reglas...\n");
-                printf("\npresiones ENTER para salir...\n");
+                mostrar_reglas();
                 esperar_enter();
                 break;
             case SALIR:
+                agregar_nuevo_puntaje(&jugador);
                 printf("Fin del programa...\n");
                 break;
             default:
@@ -60,7 +87,7 @@ int main(void)
 }
 
 /*Esta funcion va a devolver el menu principal de la entrada del juego*/
-void menu()
+void menu(Ranking *jugador)
 {
     printf("╔════════════════════╗\n");
     printf("║     MENU JUEGO     ║\n");
@@ -70,24 +97,9 @@ void menu()
     printf("║  3. Reglas         ║\n");
     printf("║  4. salir          ║\n");
     printf("╚════════════════════╝\n");
-}
 
-/*Propotipo de interfaz del juego. donde en un principio hay una visión del juego
-busco tener una visión general de cómo empezar con el juego
-podríamos anotar que funciones necesitamos para darle funcionamiento*/
-void proceso_de_juego()
-{
-    printf("╔═════════════════════════════════════════════════════════╗\n");
-    printf("║  NOMBRE_USUARIO                 ________                ║\n");
-    printf("║                                |       0                ║\n");
-    printf("║                                |      /|\\               ║\n");
-    printf("║                                |       |                ║\n");
-    printf("║                                |      / \\               ║\n");
-    printf("║                                |                        ║\n");
-    printf("║                                |                        ║\n");
-    printf("║                                |                        ║\n");
-    printf("║ letra:                         |    _ _ _ _             ║\n");
-    printf("╚═════════════════════════════════════════════════════════╝\n");
+    printf("\nNombre: %s\n", jugador->nombre_jugador);
+    printf("Puntaje actual: %d\n", jugador->puntaje_jugador);
 }
 
 /*limpia los salto de línea*/

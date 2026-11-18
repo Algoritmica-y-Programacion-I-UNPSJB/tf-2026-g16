@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 #include "palabras.h"
 
 static char banco_palabras[MAX_PALABRAS][MAX_LONGITUD];
@@ -47,4 +48,21 @@ int elegir_palabra(char *destino) {
     int indice_azar = rand() % total_palabras;
     strcpy(destino, banco_palabras[indice_azar]);
     return 1;
+}
+
+int elegir_categoria_azar(char *palabra)
+{
+    struct Categoria categorias[MAX_CATEGORIAS];
+
+    int cantidad = listar_categorias(categorias, MAX_CATEGORIAS);
+
+    if (cantidad == 0)
+        return 0;
+
+    int indice = rand() % cantidad;
+
+    if (!cargar_categoria(categorias[indice].nombre_archivo))
+        return 0;
+
+    return elegir_palabra(palabra);
 }
